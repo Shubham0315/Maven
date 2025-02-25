@@ -126,3 +126,40 @@ What is the lifecycle of Maven?
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+What are Maven goals and phases? How are they related?
+-
+**Maven Goals**
+- Goals are specific tasks executed in maven build process 
+- Each goal performs specific action like compiling code, packaging apps or cleaning up files
+- Goals are executed by maven plugins and each plugin can have multiple goals
+- Diff maven goals are :- compile, test, package, clean, install, deploy
+
+**Maven Phases**
+- Phases are stages in maven build lifecycle executed in sequence
+- Each phase represent step in build process such as validation, compilation, testing, packaging, deployment
+- Phases are part of maven's 3 built in lifecycles :- build, clean, site
+
+**Relation between Goals and Phases**
+- Goals are bound to phases. When we execute a phase, maven auto executes goals bound to that phase
+- Executing a phase also triggers all preceding phases.
+  - mvn package :- Executes validate - compile - test- package
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is a Maven repository? What are the different types?
+-
+- Maven repo is a directory where maven stores and retrieves project dependencies, plugins and artifacts. They act as centralises storage to share libraries and project binaries
+- Maven repos are used to :-
+  - Manage project dependencies efficiently
+  - Rescue artifacts across projects
+  - Maintain versioning and consistency of dependencies
+  - Enable team collab by sharing binaries
+ 
+Local Repo
+- Stored on developer's machine
+- Default location :- ~/.m2/repository
+- Maven auto checks local repo first when resolving dependencies. if not found it downloads from remote repo and caches it locally
+- We can edit local repo location :
+  <settings>
+    <localRepository>/pathToCustomRepo</localRepository>
+  </settings>
