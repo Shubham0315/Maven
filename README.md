@@ -155,11 +155,91 @@ What is a Maven repository? What are the different types?
   - Maintain versioning and consistency of dependencies
   - Enable team collab by sharing binaries
  
-Local Repo
+**Local Repo**
 - Stored on developer's machine
 - Default location :- ~/.m2/repository
 - Maven auto checks local repo first when resolving dependencies. if not found it downloads from remote repo and caches it locally
 - We can edit local repo location :
-  <settings>
-    <localRepository>/pathToCustomRepo</localRepository>
-  </settings>
+
+![image](https://github.com/user-attachments/assets/c48709a1-ffd0-4a7f-b78e-5fd7138c3d43)
+
+**Remote Repo**
+- Hosted on web servers to share dependencies across teams and organizations
+- Maven downloads dependencies from remote repos when not found locally
+- Default remote repo :- https://repo.maven.apache.org/maven2
+- Configure remote repos in pom.xml
+
+![image](https://github.com/user-attachments/assets/1804cfb7-cf21-4b92-9bd5-d1f1b3015a38)
+
+**Central Repo**
+- Maven central is the default remote repo used by maven
+- It hosts vast collection of open-source libs
+- If dependency is n0t available locally, maven auto downloads it from central
+
+- In short, local is cached on developer's machine, remote is hosted on web servers(public/private), central is default public repo (mvn central)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How do you specify dependencies in Maven?
+-
+- In maven dependencies are specified in POM file. Dependencies are modules or libraries required by project to compile, test or run
+- Dependencies are specified in <dependencies> tag of pom.xml, inside which we can define aspects like groupID, artifactsID, version, scope
+
+![image](https://github.com/user-attachments/assets/a280229f-4e4c-4340-a221-8552cbb8917b)
+
+- To manage version centrally and avoid repitition, use <dependencyManagement>
+
+![image](https://github.com/user-attachments/assets/a7144e8a-e680-425a-8914-d0b4974b98a1)
+
+- To exclude transitive dependencies
+
+![image](https://github.com/user-attachments/assets/03c9bc4b-82af-40f5-906b-6d9ef2d22453)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is the purpose of the 'dependencyManagement' tag in POM?
+-
+- This tag is used in pom to centralize and control dependency versions across multiple modules or sub projects. It helps maintain consistency, avoid version conflicts and simplify dependency declarations
+
+Centralized Version Control
+- Defines versions of dependencies in a parent POM, preventing version conflicts in child modules.
+- Child modules can inherit dependencies without specifying versions
+
+Consistency across modules
+- Ensures all sub-modules use the same version of a dependency.
+- Avoids "version hell" caused by inconsistent versions across modules.
+
+No direct inclusion in classpath
+- Dependencies declared in <dependencyManagement> are not included in the classpath automatically.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How can you exclude a transitive dependency in Maven?
+-
+- Transitive dependencies are indirectly included via another dependency. Sometimes they cause version conflicts or unnecessary bloat in project
+- To exclude transitive dependency, use <exclusions> tag inside <dependency> section
+
+Why exclude transitive dependencies
+- To avoid version conflicts when multiple libraries depend on diff versions of same dependency
+- To reduce size of build by excluding unnecessary dependencies
+- To avoid conflicts with other libs or frameworks in project
+
+![image](https://github.com/user-attachments/assets/3d75d2c9-10fa-462c-9b10-6fbe28fb4aea)
+
+- Each exclusion specofies groupID, artifactID of transitive dependency to be excluded
+- Version is not specified here as maven excluded all versions of specified artifact
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is the difference between 'compile', 'provided', and 'runtime' scopes in Maven?
+-
+- In maven scopes define visibility and availability of dependencies at different stages of build lifecycle such as compilation, testing and runtime. Common scopes are compile, provided and runtime
+
+Compile (default)
+- 
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How do you create a custom Maven plugin?
+- 
