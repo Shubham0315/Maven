@@ -103,3 +103,26 @@ Profiles
 Parent POM
 - Inherits configs and dependencies from parent object
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is the lifecycle of Maven?
+-
+- Maven's build lifecycle is a series of well-defined phases that handle complete build and deployment process of project. Each phase represent stage in build process and executing phases also triggers all other phases
+
+**Default (Build) Lifecycle**
+- Handles project deployment
+- Uses are validate project structure, initialize, compile source code, test to run unit tests, package into WAR/JAR distributable format, verify checks results of tests, install packages into local maven repo, deploy to remote repo
+- mvn package
+
+**Clean Lifecycle**
+- Cleans project by deleting previously compiled artifacts.
+- pre clean, clean to delete artifacts (target/ dir), post clean
+- mvn clean
+
+**Site Lifecycle**
+- Generates project documentation and reports.
+- pre site, site to generate, post site, site deploy to deploy generated site to web server or repo
+- mvn site
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
